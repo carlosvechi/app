@@ -1,88 +1,35 @@
 <template>
-  
     <div>
-        <div :class="format">
-            One-way data binding <br>
-            Two-way data binding <br>
-            v-model -> formulários
+        <!-- v-on é uma diretiva utilizada para capturar eventos do DOM (como click, input, teclas) e executar uma ação. -->
+         <!-- Resumindo: serve para capturar ações do usuário e reagir a elas. No formato abreviado, utiliza-se @ -->
+        <button @click="onClick">
+            Enviar
+        </button>
+
+        <br><br>
+
+        <!-- esse exemplo retorna toda vez que o mouse é passado em cima de 'mouse over' e também quando é tirado -->
+        <div @mouseover="onMouseOver"
+            @mouseout="onMouseOut"
+        >
+            Mouse over
         </div>
 
-        <br>
-        <br>
+        <br><br>
 
-        <div>
-            <!-- retorna o nome digitado pelo usuário no campo input, nesse caso, o nome -->
-            <label for="">Nome</label> <br>
-            <input v-model="name"      
-                    type="text"
-            > <br>
-
-            {{ name }}
-        </div>
+        <!-- o botão direciona para o google, porém, o prevent impede que isso aconteça -->
+        <form action="https://google.com"
+                @submit.prevent="onSubmit"
+            >
+            <!-- captura o que for digitado no campo input, mas somente após apertar a tecla enter -->
+            <input type="text"
+                    @keyup.enter="onKeyUp"
+            >
+            <button type="submit">
+                Enviar
+            </button>
+        </form>
     </div>
-
-    <br> <br>
-
-    <div>
-        <!-- cria um select, onde é retornado a escolha do usuário, entre as opções. Obs: se inicializar no data com algum valor, essa opção ficara pré selecionada -->
-        <label :class="format">Sports</label> <br>
-        <select v-model="sports">
-            <option value="">Escolha</option>
-            <option value="futebol">Futebol</option>
-            <option value="skate">Skate</option>
-            <option value="tenis">Tenis</option>
-        </select> <br>
-        {{ sports }}
-    </div>
-
-    <!-- Retorna o campo selecionado no checkbox sim/não -->
-    <div>
-        <label>Newsletter</label> <br>
-        <input 
-            v-model="newsletter"
-            type="radio"
-            value="Sim"
-            > Sim
-
-        <input 
-            v-model="newsletter"
-            type="radio"
-            value="Não"
-            > Não <br> <br>
-            {{ newsletter }}
-    </div>
-
-    <!-- retorna true/false, dependendo da escolha do usuário -->
-     <div>
-        <label>Contrato</label> <br>
-        <input 
-            v-model="contract"
-            type="checkbox"
-            value="Sim"
-            > Aceita nossos termos... <br>
-
-            {{ contract }}
-    </div>
-
-    <br><br>
-
-    <!-- Aqui é um checkbox para múltiplas escolhas. A diferença no data, é que ele será um array e retornará as opções marcadas -->
-     <div>
-        <label>Cores que você mais gosta</label> <br>
-        <input 
-            v-model="colors"
-            type="checkbox"
-            value="Azul"
-            > Azul
-
-        <input 
-            v-model="colors"
-            type="checkbox"
-            value="Amarelo"
-            > Amarelo <br> <br>
-            {{ colors }}
-    </div>
-
 </template>
 
 <script>
@@ -90,12 +37,25 @@
         name: 'App', 
         data() {
             return {
-                name: 'Jon Snow',
-                format: 'app',
-                sports: '',
-                newsletter: '',
-                contract: false,
-                colors: []
+                
+            }
+        },
+
+        methods: { //$evt conterá todas as informações sobre o que aconteceu: elemento disparado, tecla pressionada, coordenadas de clique etc
+            onClick($evt) {
+                console.log('click', $evt);
+            },
+            onMouseOver($evt) {
+                console.log('mouse over', $evt)
+            },
+            onMouseOut($evt) {
+                console.log('mouse out', $evt)
+            },
+            onSubmit($evt) {
+                console.log('submit', $evt)
+            },
+            onKeyUp($evt) {
+                console.log('onKeyUp', $evt)
             }
         }
     }
