@@ -18,19 +18,17 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue' //importando
 import TheHeader from './components/TheHeader.vue';
-import Model from './components/Model.vue';
 
 export default { //objeto que contém os atributos do componente
   name: 'App',
   components: {
     // HelloWorld, //declarando 
-    TheHeader,
-    Model
+    TheHeader
   }
   ,
   data() { //função que vai retornar objetos
     return {
-      showHeader: false,
+      showHeader: true,
       firstName: 'Jon',
       lastName: 'Snow',
       showName: false,
