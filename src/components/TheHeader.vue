@@ -1,64 +1,110 @@
 <template>
     <div>
-        <!-- v-on é uma diretiva utilizada para capturar eventos do DOM (como click, input, teclas) e executar uma ação. -->
-         <!-- Resumindo: serve para capturar ações do usuário e reagir a elas. No formato abreviado, utiliza-se @ -->
-        <button @click="onClick">
-            Enviar
-        </button>
+        {{ fullName }}  <br><br>
 
-        <br><br>
+        <h2>Todos em aberto</h2>
 
-        <!-- esse exemplo retorna toda vez que o mouse é passado em cima de 'mouse over' e também quando é tirado -->
-        <div @mouseover="onMouseOver"
-            @mouseout="onMouseOut"
+        <div v-for="todo in uncompletedTodos"
+            :key="todo.id"        
         >
-            Mouse over
+        {{ todo.title }} 
+            
         </div>
 
-        <br><br>
+        <h2>Todos completas</h2>
 
-        <!-- o botão direciona para o google, porém, o prevent impede que isso aconteça -->
-        <form action="https://google.com"
-                @submit.prevent="onSubmit"
-            >
-            <!-- captura o que for digitado no campo input, mas somente após apertar a tecla enter -->
-            <input type="text"
-                    @keyup.enter="onKeyUp"
-            >
-            <button type="submit">
-                Enviar
-            </button>
-        </form>
+         <div v-for="todo in completedTodos"
+            :key="todo.id"        
+        >
+        {{ todo.title }} <span>{{ todo.completed }}</span>
+            
+        </div>
+        <br><br><br>
+
+        <h2>Todos</h2>
+
+         <div v-for="todo in todos"
+            :key="todo.id"        
+        >
+        <input 
+            v-model="todo.completed"
+            type="checkbox"
+            
+        >
+        {{ todo.title }} 
+            
+        </div>
+
+
     </div>
 </template>
 
 <script>
+
     export default { 
         name: 'App', 
         data() {
             return {
-                
+                user: {
+                    first_name: 'Jon',
+                    last_name: 'Snow'
+                },
+                 todos: [
+                        {
+                            "userId": 1,
+                            "id": 1,
+                            "title": "delectus aut autem",
+                            "completed": false,
+                            "imgSrc": 'https://placehold.jp/150x150.png'
+                        },
+                        {
+                            "userId": 1,
+                            "id": 2,
+                            "title": "quis ut nam facilis et officia qui",
+                            "completed": false,
+                            "imgSrc": 'https://placehold.jp/150x150.png'
+                        },
+                        {
+                            "userId": 1,
+                            "id": 3,
+                            "title": "fugiat veniam minus",
+                            "completed": false
+                        },
+                        {
+                            "userId": 1,
+                            "id": 4,
+                            "title": "et porro tempora",
+                            "completed": true
+                        },
+                        {
+                            "userId": 1,
+                            "id": 5,
+                            "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+                            "completed": false
+                        }
+                ]
             }
         },
 
-        methods: { //$evt conterá todas as informações sobre o que aconteceu: elemento disparado, tecla pressionada, coordenadas de clique etc
-            onClick($evt) {
-                console.log('click', $evt);
+        computed: {
+            fullName() {
+                return `${this.user.first_name} ${this.user.last_name}` 
             },
-            onMouseOver($evt) {
-                console.log('mouse over', $evt)
+
+            uncompletedTodos() {
+                return  this.todos.filter(todo => !todo.completed);
+                
             },
-            onMouseOut($evt) {
-                console.log('mouse out', $evt)
+            completedTodos() {
+                return this.todos.filter(todo => todo.completed);
             },
-            onSubmit($evt) {
-                console.log('submit', $evt)
-            },
-            onKeyUp($evt) {
-                console.log('onKeyUp', $evt)
-            }
+        },
+
+        methods: {
+            
         }
-    }
+
+        }
 </script>
 
 <style>
