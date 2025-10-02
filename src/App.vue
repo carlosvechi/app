@@ -1,40 +1,89 @@
 <template>
   
     <TheHeader v-if="showHeader" />
+    <div>
+       <h1>Hello World</h1>
+       <br>
+       <input 
+          v-model="name"
+          type="text"
+        >
+        {{ name }} <br>
+        <!-- O botão tem uma função showheader, que inicia como ativo. Ele define se o 'header' aparece, ou não. -->
+        <!-- Quando ele é ativado, ele passa pelos hooks: beforeCreate(antes de criar), created(criado), beforeMount(antes da montagem) e monted(montado)  -->
+        <!-- Ao clicar para desativar o header, ele passa por beforeUnmount(antes de desmontar) e unmounted(desmontado) -->
+        <!-- Ou seja, na fase de 'desmontar', ele exclui toda a construção. Ao ativar novamente, ele constroi novamente também. -->
+        <button @click="showHeader = !showHeader">
+          Ativar e desativar header
+        </button>
+    </div>
  
-  <div v-show="showName"> 
-    Nome: {{ firstName }} <br>
-    Sobrenome: {{ lastName }}
-  </div>
-
-  <!-- condicionais. Nesse exemplo, se a varíavel 'acessLevel', que veio de 'data' for admin, marketing ou qlq outra coisa, ele retorna os respectivos textos -->
-  <div v-if="acessLevel === 'admin'">Admin</div> 
-  <div v-else-if="acessLevel === 'marketing'">Marketing</div>
-
-  <!-- <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>   -->
+  
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue' //importando
+
 import TheHeader from './components/TheHeader.vue';
 
-export default { //objeto que contém os atributos do componente
+export default { 
   name: 'App',
   components: {
-    // HelloWorld, //declarando 
+    
     TheHeader
   }
   ,
-  data() { //função que vai retornar objetos
+  data() { 
     return {
-      showHeader: true,
-      firstName: 'Jon',
-      lastName: 'Snow',
-      showName: false,
-      acessLevel: false
+     name: 'Jon Snow',
+     showHeader: true, //componente que adiciona e exclui o header, utilizado no botão
     }
-  }
+  },
+
+  
+  //Criação
+    //Preparar o componente
+    //Ajax, inicializar algumas variáveis
+    //Não tem acesso ao template (DOM)
+//Montagem
+    //Inicializar um lib externa (new Lib())
+    //Precisa de acesso ao template (DOM)
+    //Tem acesso ao template (DOM)
+//Atualização
+    //Debug
+    //Update
+//Desmontagem
+    //Remover tudo o que for necessário
+    //para liberar memória
+
+          beforeUpdate() {
+          console.log('beforeUpdate', this.name);
+        },
+        updated() {
+          console.log('updated', this.name);
+        },
+
+        //HOOKS
+        beforeCreate() {
+            console.log('beforeCreate');
+            console.log('Estado: ', this.name);
+            console.log('Dom: ', this.$el)
+        },
+        created() {
+            console.log('created');
+            console.log('Estado: ',this.name);
+            console.log('Dom: ', this.$el)
+        },
+        beforeMount() {
+            console.log('beforeMount');
+            console.log('Estado: ',this.name);
+            console.log('Dom: ', this.$el)
+        },  
+        mounted() {
+            console.log('mounted');
+            console.log('Estado: ',this.name);
+            console.log('Dom: ', this.$el)    
+        },
+
 }
 </script>
 
