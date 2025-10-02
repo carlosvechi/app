@@ -1,44 +1,33 @@
 <template>
     <div>
-        {{ fullName }}  <br><br>
-
-        <!-- v-for para percorrer o array 'todos' (apelidado de todo aqui) com um filtro (dentro de computed). esse vai retornar apenas os 'completed' = false, ou seja, todos em aberto -->
-        <h2>Todos em aberto</h2>
-        <div v-for="todo in uncompletedTodos"
-            :key="todo.id"        
-        >
-        {{ todo.title }} 
-            
-        </div>
-
-        <!-- Aqui segue a mesma lógica, porém, vai retornar as todos completas. E além de retornar o título, retorna o 'completed', ou seja, adiciona um true. -->
-        <h2>Todos completas</h2>
-         <div v-for="todo in completedTodos"
-            :key="todo.id"        
-        >
-
-        {{ todo.title }} <span>{{ todo.completed }}</span>
-            
-        </div>
-        <br><br><br>
-
-        <!-- Aqui é a mágica do v-model. Vai criar um checkbox do array todos completo. Ao selecionar um checkbox,  -->
-        <!-- altera o valor de 'completed' para 'true', alterando a lista do template. Ou seja, inicialmente, -->
-        <!-- Apenas o array 4 é true, mas o checkbox + v-model criam a ligação em duas direções, onde é alterado o valor de 'completed' no próprio checkbox -->
-        <h2>Todos</h2>
-         <div v-for="todo in todos"
-            :key="todo.id"        
-        >
+        <!-- um v-model padrão que reproduz o que foi escrito no campo input -->
         <input 
-            v-model="todo.completed"
-            type="checkbox"
-            
-        >
-        {{ todo.title }} 
-            
-        </div>
+            type="text"
+            v-model="name"
+            > <br>
+           <p :style="{ color: 'red'}">{{ name }}</p>
 
+           <br><br><br>
 
+        <!-- reproduz no template o primeiro nome, e o segundo. Ambos vindo do campo input -->
+        <input 
+            v-model="user.first_name"
+            type="text"
+            > <br>
+
+        <input 
+            v-model="user.last_name"
+            type="text"
+            > <br>
+            <p :style="{color: 'red'}"> {{ user.first_name }} {{ user.last_name }}</p>
+
+        <!-- v-model para o escolhido no option do select -->
+        <select v-model="pageCount" >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        </select> <br>
+        {{ pageCount }}
     </div>
 </template>
 
@@ -48,63 +37,48 @@
         name: 'App', 
         data() {
             return {
+                //dados do data sendo iniciados
+                name: '',
+                pageCount: 5,
                 user: {
-                    first_name: 'Jon',
-                    last_name: 'Snow'
-                },
-                 todos: [
-                        {
-                            "userId": 1,
-                            "id": 1,
-                            "title": "delectus aut autem",
-                            "completed": false,
-                            "imgSrc": 'https://placehold.jp/150x150.png'
-                        },
-                        {
-                            "userId": 1,
-                            "id": 2,
-                            "title": "quis ut nam facilis et officia qui",
-                            "completed": false,
-                            "imgSrc": 'https://placehold.jp/150x150.png'
-                        },
-                        {
-                            "userId": 1,
-                            "id": 3,
-                            "title": "fugiat veniam minus",
-                            "completed": false
-                        },
-                        {
-                            "userId": 1,
-                            "id": 4,
-                            "title": "et porro tempora",
-                            "completed": true
-                        },
-                        {
-                            "userId": 1,
-                            "id": 5,
-                            "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-                            "completed": false
-                        }
-                ]
+                    first_name: '',
+                    last_name: ''
+                }
             }
         },
 
-        computed: {
-            fullName() {
-                return `${this.user.first_name} ${this.user.last_name}` //computed precisa usar um 'this' para instanciar um objeto no data
+        //O watch serve para observar mudanças em uma variavél e executar uma ação automaticamente quando esse valor mudar
+        //serve para validar input, fazer uma requisição API, atualizar outra variavél automat. e sincronizar dados
+        watch: {
+            name(vl) { //vai executar o método 'saveUserName' toda vez que vl >= 3. vl é a qnt de caracteres digitado no input
+              if (vl.length >= 3) {
+                this.saveUserName();
+              }
             },
+        pageCount() { //executa o método changePage
+            this.changePage();
+        },
+        user: { //a lógica aqui é fazer o watch visualiazar mais profundamente, pois o input ele altera somente this.first_name e this.last_name
+            handler() { //então, ele não altera o user em si, mas seus 'atributos'. E para fazer ele enxergar, devemos utilizar 'deep' e handler vai exec a função
+                console.log('User alterado');
+            },
+            deep: true
+        }
 
-            uncompletedTodos() {
-                return  this.todos.filter(todo => !todo.completed);
-                
-            },
-            completedTodos() {
-                return this.todos.filter(todo => todo.completed);
-            },
+        },
+
+        computed: {
+
         },
 
         methods: {
-            
+            saveUserName() { //método chamado no watch name
+                console.log('Ajax');
+                console.log(this.name);
+            },
+            changePage() { //método chamado no watch pageCount
+                console.log('Ajax changePage');
+            }
         }
 
         }
