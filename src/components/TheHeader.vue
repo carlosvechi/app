@@ -23,7 +23,7 @@
                     </li>
                 </ul>
                 <div class="d-flex me-auto">
-                    <button class="btn btn-primary mx-5 " data-bs-toggle="modal" data-bs-target="#myModal"
+                    <button class="btn btn-primary mx-5" @click="abrirModal" data-bs-toggle="modal" data-bs-target="#myModal"
                         type="button">✚
                         Create</button>
                 </div>
@@ -83,45 +83,20 @@
             </div>
         </div>
     </nav>
-
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    Modal body..
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
 </template>
 
 <script>
 
-export default {
 
+export default {
     data() {
         return {
 
         }
     },
-
+    methods: {
+       
+    }
 }
 
 

@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-sm  navbar-dark fixed-bottom nav-cor">
+<nav class="navbar navbar-expand-sm  navbar-dark  nav-cor">
     <div class="container" style="width: 490px;">
         <div class="mx-4">
             <span class="material-symbols-outlined text-dark">

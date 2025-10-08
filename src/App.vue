@@ -2,6 +2,7 @@
   <div class="">
     <div><TheHeader /></div>
     <div><TheTemplate /> </div>
+    <div><TheModal /></div>
     <div><TheFooter /></div>
   </div>
 </template> 
@@ -11,6 +12,7 @@
 import TheHeader from './components/TheHeader.vue';
 import TheFooter from './components/TheFooter.vue';
 import TheTemplate from './components/TheTemplate.vue';
+import TheModal from './components/TheModal.vue';
 
 export default { 
   name: 'App',
@@ -19,6 +21,7 @@ export default {
     TheHeader,
     TheFooter,
     TheTemplate,
+    TheModal,
   }
   ,
   data() { 
@@ -32,11 +35,7 @@ export default {
 
 <style>
 body{
-  background-color: rgb(158, 158, 158) !important;
+  background-color: rgb(153, 153, 153) !important;
 }
 
-.container {
- 
-
-}
 </style>

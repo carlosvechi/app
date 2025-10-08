@@ -1,45 +1,70 @@
-<template>
-    <div class="container-fluid scrollmenu">
-        <div class="row">
-            <div class="col-sm-12 col-xl-3 card myCard">1
-                <p>aloooooooo</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">2
-                <p>aloooooooofsdfdfddfd</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-            <div class="col-sm-12 col-xl-3 card myCard">3
-                <p>aloooooooosdvdgerfee</p>
-            </div>
-        </div>
-    </div>
-</template>
 
-<script>
+<script setup>
+
+import TheColuna from './TheColuna.vue';
+import TheCard from './TheCard.vue';
 
 </script>
 
+
+<template>
+    <!-- d-flex mantém os itens alinhado na horizontal -->
+    <div class="d-flex overflow-x-auto">
+
+        <!-- define o 'card principal'. Os cards menores, ficarão dentro dele. -->
+        <div class="colunas">
+            <TheColuna />
+
+            <!-- corpo dos cards menores -->
+            <TheCard />
+            <TheCard />
+
+        </div>
+
+        <div class="colunas">
+            <TheColuna />
+
+            <!-- corpo dos cards menores -->
+            <TheCard />
+
+        </div>
+
+        <div class="colunas">
+            <TheColuna />
+
+            <!-- corpo dos cards menores -->
+            <TheCard />
+
+        </div>
+
+        <div class="colunas">
+            <TheColuna />
+
+            <!-- corpo dos cards menores -->
+            <TheCard />
+
+        </div>
+
+        <div class="colunas">
+            <TheColuna />
+
+            <!-- corpo dos cards menores -->
+            <TheCard />
+
+        </div>
+
+    </div>
+</template>
+
 <style>
-.myCard {
-    background-color: #F9FAFB !important;
-    box-shadow: inset 0px 0px 10px #888888;
-    border-radius: 15px !important;
+.colunas {
+    height: fit-content;
+    min-width: 300px;
+    min-height: 100vh;
+    margin: 19px 10px 10px 10px;
+    max-width: 300px;
+    background-color: #e5e5e7;
+    border-radius: 4px;
 }
-.wrapper {
-    overflow-x: auto;
-}
+
 </style>
