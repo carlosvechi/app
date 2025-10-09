@@ -1,15 +1,19 @@
+
+<script setup>
+// import { defineProps } from 'vue'
+
+//     const prop = defineProps({
+//         tarefa: Object,
+//         required: true
+//     })
+</script>
 <template>
-    <div class="myCard">
+    <div  class="myCard">
         <div class="card-body">
             <p class="m-1">SEI LÁ</p>
         </div>
     </div>
 </template>
-
-<script>
-
-</script>
-
 <style>
 .myCard {
     background-color: #F9FAFB !important;

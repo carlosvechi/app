@@ -7,30 +7,18 @@
   </div>
 </template> 
 
-<script>
-
+<script setup>
+import {ref, provide} from 'vue';
 import TheHeader from './components/TheHeader.vue';
 import TheFooter from './components/TheFooter.vue';
 import TheTemplate from './components/TheTemplate.vue';
 import TheModal from './components/TheModal.vue';
+import Cols from './components/Array.js';
 
-export default { 
-  name: 'App',
-  components: {
-    
-    TheHeader,
-    TheFooter,
-    TheTemplate,
-    TheModal,
-  }
-  ,
-  data() { 
-    return {
-      
-    }
-  }
-  
-}
+const lista_cols = ref(Cols);
+const tarefas   = ref([])
+provide('lista_cols', lista_cols);
+provide('tarefas', tarefas);
 </script>
 
 <style>

@@ -1,58 +1,37 @@
 
 <script setup>
+    import { inject } from 'vue';
+    // import  draggable from 'vuedraggable'
+    // import TheCard from './TheCard.vue';
 
-import TheColuna from './TheColuna.vue';
-import TheCard from './TheCard.vue';
+    const colunas = inject('lista_cols');
 
 </script>
-
-
 <template>
     <!-- d-flex mantém os itens alinhado na horizontal -->
-    <div class="d-flex overflow-x-auto">
+    <div class="d-flex item-start overflow-x-auto">
 
         <!-- define o 'card principal'. Os cards menores, ficarão dentro dele. -->
-        <div class="colunas">
-            <TheColuna />
-
+        <div v-for="(coluna,index) in colunas" :key="index" class="colunas">
+            <div class="card-header">
+                <div class="d-flex txt">
+                    <h5>{{ coluna.titulo }}</h5>
+                    <h5>{{ coluna.tarefas.length }}</h5>
+                </div>
+            </div>
+            <!-- <draggable
+                v-model="coluna.tarefas"
+                :group="{ name: 'tarefas', pull: true, put: true }"
+                item-key="id"
+                animation="200"
+                ghost-class="ghost"
+            >-->
             <!-- corpo dos cards menores -->
-            <TheCard />
-            <TheCard />
-
+                <!-- <template #item="{ element: tarefa }">
+                    <TheCard :tarefa="tarefas[tarefa]" />
+                </template>
+            </draggable> -->
         </div>
-
-        <div class="colunas">
-            <TheColuna />
-
-            <!-- corpo dos cards menores -->
-            <TheCard />
-
-        </div>
-
-        <div class="colunas">
-            <TheColuna />
-
-            <!-- corpo dos cards menores -->
-            <TheCard />
-
-        </div>
-
-        <div class="colunas">
-            <TheColuna />
-
-            <!-- corpo dos cards menores -->
-            <TheCard />
-
-        </div>
-
-        <div class="colunas">
-            <TheColuna />
-
-            <!-- corpo dos cards menores -->
-            <TheCard />
-
-        </div>
-
     </div>
 </template>
 
@@ -60,11 +39,17 @@ import TheCard from './TheCard.vue';
 .colunas {
     height: fit-content;
     min-width: 300px;
-    min-height: 100vh;
+    min-height: 470px;
     margin: 19px 10px 10px 10px;
     max-width: 300px;
     background-color: #e5e5e7;
     border-radius: 4px;
 }
 
+.txt {
+    justify-content: space-between;
+}
+.card-header {
+    margin: 19px 10px 10px 10px;
+}
 </style>
